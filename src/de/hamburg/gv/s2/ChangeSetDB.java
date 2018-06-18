@@ -192,7 +192,7 @@ public class ChangeSetDB {
 	public void saveToFile(File exportFile) {
 		String text = "";
 		for (ChangeSet cs : this.changes) {
-			text += cs.toString("\t") + "\n\r";
+			text += cs.toString("\t") + "\n";
 		}
 		BufferedWriter writer = null;
 		try {
@@ -215,12 +215,16 @@ public class ChangeSetDB {
 			BufferedReader in = new BufferedReader(new FileReader(importFile));
 
 			String line = "";
-			while ((line = in.readLine()) != null && line.length() >= 15) {
+			while ((line = in.readLine()) != null) {
+				System.out.println("Buchstaben: " + line.length());
 				String[] input = line.split("\t");
+				if (input.length < 4) {
+					continue;
+				}
 				ChangeSet cs = new ChangeSet();
-				System.out.println(input.length);
-				for (String s : input)
-					System.out.print(s);
+				System.out.println("Teile: " + input.length);
+				// for (String s : input)
+				// System.out.print(s);
 				if (input.length >= 4) {
 					cs.setAlt(Station.fromString(input[0], input[1], input[2], input[3]));
 				}
@@ -231,7 +235,7 @@ public class ChangeSetDB {
 					cs.setGedreht(Boolean.valueOf(input[8]));
 				}
 				this.addSimple(cs);
-				System.out.println(this.size());
+				// System.out.println(this.size());
 			}
 			in.close();
 		} catch (IOException e) {
