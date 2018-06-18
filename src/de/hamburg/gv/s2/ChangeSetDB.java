@@ -31,6 +31,7 @@ public class ChangeSetDB {
 
 	public void addSimple(ChangeSet neu) {
 		changes.add(neu);
+		dataChanged();
 	}
 
 	public void add(ChangeSet[] neue) {

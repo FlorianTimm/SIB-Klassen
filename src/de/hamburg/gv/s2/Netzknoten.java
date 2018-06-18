@@ -84,4 +84,8 @@ public class Netzknoten implements Comparable<Netzknoten> {
 	public Netzknoten clone() {
 		return new Netzknoten (this.toString());
 	}
+	
+	public boolean equals(Netzknoten nk) {
+		return this.toString().equals(nk.toString());
+	}
 }
